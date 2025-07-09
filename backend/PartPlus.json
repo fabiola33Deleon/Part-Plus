@@ -1,0 +1,501 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Simple Inventory API",
+    "description": "This is a simple API",
+    "contact": {
+      "email": "you@your-company.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/ricaldone-5f3/PartPlus/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "tags": [
+    {
+      "name": "admins",
+      "description": "Secured Admin-only calls"
+    },
+    {
+      "name": "developers",
+      "description": "Operations available to regular developers"
+    }
+  ],
+  "paths": {
+    "/inventory": {
+      "get": {
+        "tags": [
+          "developers"
+        ],
+        "summary": "searches inventory",
+        "description": "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "operationId": "searchInventory",
+        "parameters": [
+          {
+            "name": "searchString",
+            "in": "query",
+            "description": "pass an optional search string for looking up inventory",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "number of records to skip for pagination",
+            "required": false,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of records to return",
+            "required": false,
+            "schema": {
+              "maximum": 50,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventoryItem"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adds an inventory item",
+        "description": "Adds an item to the system",
+        "operationId": "addInventory",
+        "requestBody": {
+          "description": "Inventory item to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Manufacturer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "item created"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/Cliente": {
+      "get": {
+        "tags": [],
+        "summary": "GET",
+        "description": "Con este metodo puedes ver todos los clientes ",
+        "operationId": "get-Cliente",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [],
+        "summary": "PUT",
+        "description": "Con este metodo puedes actualizar los clientes ",
+        "operationId": "put-Cliente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cliente_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "tags": [],
+        "summary": "POST",
+        "description": "Con este metodo puedes agregar a la tabla clientes ",
+        "operationId": "post-Cliente",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cliente_body_1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [],
+        "summary": "DELETE",
+        "description": "Con este metodo puedes eliminar clientes ",
+        "operationId": "delete-Cliente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/Reserva": {
+      "get": {
+        "tags": [],
+        "summary": "GET",
+        "description": "Con este metodo puedes ver todos las Reservas ",
+        "operationId": "get-Reserva",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [],
+        "summary": "PUT",
+        "description": "Con este metodo puedes actualizar las reservas ",
+        "operationId": "put-Reserva",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reserva_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "tags": [],
+        "summary": "POST",
+        "description": "Con este metodo puedes agregar a la tabla reserva ",
+        "operationId": "post-Reserva",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Reserva_body_1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [],
+        "summary": "DELETE",
+        "description": "Con este metodo puedes eliminar reservas  ",
+        "operationId": "delete-Reserva",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "InventoryItem": {
+        "required": [
+          "id",
+          "manufacturer",
+          "name",
+          "releaseDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "name": {
+            "type": "string",
+            "example": "Widget Adapter"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2016-08-29T09:12:33.001Z"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/Manufacturer"
+          }
+        }
+      },
+      "Manufacturer": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "ACME Corporation"
+          },
+          "homePage": {
+            "type": "string",
+            "format": "url",
+            "example": "https://www.acme-corp.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "408-867-5309"
+          }
+        }
+      },
+      "Cliente_body": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "tvhxzcdhci7r5"
+            }
+          },
+          "email": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "uetvmh90up57q"
+            }
+          },
+          "password": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "txhczsf73dnyf"
+            }
+          },
+          "phone": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "zcew51bb24gal"
+            }
+          },
+          "age": {
+            "maximum": 100,
+            "minimum": 18,
+            "type": "number",
+            "x-stoplight": {
+              "id": "rdtqxbi4c7pe4"
+            }
+          }
+        }
+      },
+      "Cliente_body_1": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "g251n178wq16f"
+            }
+          },
+          "email": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "6027ase87vk1c"
+            }
+          },
+          "password": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1yerck7ldq8xs"
+            }
+          },
+          "phone": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "r4nulg76m9hw6"
+            }
+          },
+          "age": {
+            "maximum": 100,
+            "minimum": 18,
+            "type": "number",
+            "x-stoplight": {
+              "id": "ytteas8q93p14"
+            }
+          }
+        }
+      },
+      "Reserva_body": {
+        "type": "object",
+        "properties": {
+          "idClientes": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "eu5k8ggswmr1z"
+            }
+          },
+          "vehicle": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "mij9sl1s3a3v8"
+            }
+          },
+          "service": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "3z8clfx9om09l"
+            }
+          },
+          "status": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "dp4mayy0qkrij"
+            }
+          }
+        }
+      },
+      "Reserva_body_1": {
+        "type": "object",
+        "properties": {
+          "idClientes": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "u0gvwojfjhvf3"
+            }
+          },
+          "vehicle": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "axe64sepe115t"
+            }
+          },
+          "service": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "kv84ljmkwm2cn"
+            }
+          },
+          "status": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "c6djxnyi7lqdc"
+            }
+          }
+        }
+      }
+    }
+  }
+}
